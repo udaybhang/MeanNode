@@ -18,7 +18,6 @@ class UserRouter {
     getRoutes() {
         this.router.get('/getProduct',UserController.getProduct);
         this.router.get('/getSingleProduct/:Id', UserController.getSingleProduct)
-        this.router.get('/send/verification/email',  UserController.resendVerificationEmail);
     }
 
     postRoutes() {
