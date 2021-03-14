@@ -18,8 +18,7 @@ export class Server {
         this.connectMongoDb();
         this.configureBodyParser();
         this.app.use(bodyParser.json());
-        // this.app.use("/images", express.static(path.join("backend/images")));
-        this.app.use(express.static(path.join(__dirname, 'public/images')));
+        this.app.use(express.static(path.join(__dirname, 'public')));
         var cors = require('cors');
         // this.app.use(cors({origin: '*','exposedHeaders' : ['X-Total-Count','Content-Type']}));
         this.app.use(function(req, res, next) {
