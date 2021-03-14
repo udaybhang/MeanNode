@@ -31,7 +31,7 @@ export class Server {
     }
 
     connectMongoDb() {
-        mongoose.connect("mongodb://localhost:27017/insurance_brokerage", {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
+        mongoose.connect("mongodb://localhost:27017/product", {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
             console.log('connected to database');
         });
     }
