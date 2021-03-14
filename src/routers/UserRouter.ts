@@ -14,8 +14,22 @@ class UserRouter {
         this.putRoute();
         this.postRoutes();
     }
+
+   
     putRoute() {
-       this.router.put('/updateProduct', UserController.updateProduct)
+            const storage = multer.diskStorage({
+                destination: (req, file, callBack) => {
+                    // console.log(path.join(__dirname, '../public/images'))
+                    let dest =path.join(__dirname, '../public/images/')
+                    callBack(null, dest); // images folder name
+                },
+                filename: (req, file, callBack) => {
+                    callBack(null, `${file.originalname}`)
+                }
+              })
+              const upload = multer({ storage: storage })
+        
+       this.router.put('/updateProduct', upload.single('file'), UserController.updateProduct)
     }
 
     getRoutes() {
