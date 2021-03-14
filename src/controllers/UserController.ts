@@ -8,11 +8,15 @@ export class UserController {
         const modal = req.body.modal;
         const price = req.body.price;
         const category = req.body.category;
+        const url = req.protocol + "://" + req.get('host');
+        console.log(url)
+       const imgPath =  url + '/images/' + req.file.filename
         const data = {
             name: name,
             modal: modal,
             price: price,
             category: category,
+            imagePath: imgPath,
             created_at: new Date(),
             updated_at: new Date()
         };

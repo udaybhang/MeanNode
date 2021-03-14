@@ -6,6 +6,9 @@ const userSchema = new mongoose.Schema({
     modal: {type: String, required: true},
     price: {type: Number, required: true},
     category: {type: String, required: true},
+    imagePath: {
+        type: String, require:  true
+      },
     created_at: {type: Date, required: true, default: new Date()},
     updated_at: {type: Date, required: true, default: new Date()},
 });

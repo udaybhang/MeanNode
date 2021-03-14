@@ -1,5 +1,6 @@
 import * as express from 'express';
 import * as mongoose from 'mongoose';
+const path = require('path');
 import UserRouter from './routers/UserRouter';
 import bodyParser = require('body-parser');
 
@@ -17,12 +18,21 @@ export class Server {
         this.connectMongoDb();
         this.configureBodyParser();
         this.app.use(bodyParser.json());
+        // this.app.use("/images", express.static(path.join("backend/images")));
+        this.app.use(express.static(path.join(__dirname, 'public/images')));
         var cors = require('cors');
-this.app.use(cors({origin: '*','exposedHeaders' : ['X-Total-Count','Content-Type']}));
+        // this.app.use(cors({origin: '*','exposedHeaders' : ['X-Total-Count','Content-Type']}));
+        this.app.use(function(req, res, next) {
+            //set headers to allow cross origin request.
+                res.header("Access-Control-Allow-Origin", "*");
+                res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+                res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+                next();
+            });
     }
 
     connectMongoDb() {
-        mongoose.connect("mongodb://localhost:27017/product", {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
+        mongoose.connect("mongodb://localhost:27017/insurance_brokerage", {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
             console.log('connected to database');
         });
     }
