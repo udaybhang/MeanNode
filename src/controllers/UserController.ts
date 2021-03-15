@@ -9,7 +9,6 @@ export class UserController {
         const price = req.body.price;
         const category = req.body.category;
         const url = req.protocol + "://" + req.get('host');
-        console.log(url)
        const imgPath =  url + '/images/' + req.file.filename
         const data = {
             name: name,
@@ -39,6 +38,9 @@ export class UserController {
 
 static async updateProduct(req, res, next) {
     try {
+       
+        const url = req.protocol + "://" + req.get('host');
+        req.body.imagePath =  url + '/images/' + req.file.filename;
         Product.findByIdAndUpdate(req.body._id, req.body, {new:true}, (err, data)=>{
             if(err) {
               console.log(err);
@@ -56,7 +58,6 @@ static async updateProduct(req, res, next) {
 
     static async getSingleProduct(req, res, next) {
         const prodId = req.params.Id;
-        console.log(prodId)
         try {
             let P1Data = await Product.findById({_id: prodId});
             res.status(200).send(P1Data);    
